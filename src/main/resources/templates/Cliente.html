@@ -2,20 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Clientes</title>
 </head>
 <body>
 <h1>Formulario de Carga de Cliente</h1>
 	<form id="formProducto" th:object="${unCliente}" th:action="@{/cliente/guardar}" method="post">
-		
+					<label for="na">Nombre y Apellido</label> 
+			<input type="text"	id="na" th:field="*{nombreApellido}">
+			<br>
+			<label for="contra">Password</label> 
+			<input type="password"	id="contra" th:field="*{password}">
+			<br>
 			<label for="numdoc">Documento</label> 
 			<input type="number"	id="numdoc" th:field="*{nroDocumento}">
-		<br>
-		    <label for="nya">Nombre y Apellido</label> 
-			<input type="text"	id="nya" th:field="*{nYa}">
-		<br>
-			<label for="password">Contraseña</label> 
-			<input type="password" id="password" th:field="*{password}">
 		<br>
 		
 			<label for="fechanac">Nacimiento</label>			
@@ -23,7 +22,10 @@
 		<br>
 		
 			<label for="tipo">Tipo</label> 
-			<input type="text" id="tipo" th:field="*{tipoDocumento}">
+			<select id="tipo" th:field"*{tipoDocumento}">
+			<option value="DNI">DNI</option>
+			<option value="Pasaporte">Pasaporte</option>
+			</select>
 		<br>
 		
 			<label for="codigo">Cod Area</label> 
@@ -37,12 +39,9 @@
 			<label for="email">Email</label> 
 			<input type="email" id="email" th:field="*{email}">
 		<br>
-			<label for="fechault">Ultima Compra</label>			
-			<input type="date"	id="fechault" th:field="*{fechaUltimaCompra}">
-		<br>
-		
-		
-
+			<label for="fechacomp">FechaUltCompra</label> 
+			<input type="date" id="fechacomp" th:field="*{fechaUltimaCompra}">
+			<br>
 		<div>
 			<button type="submit" value="Agregar">Agregar</button>
 		</div>
@@ -53,42 +52,32 @@
 
 <h3>Lista de Clientes</h3><br>
 			<div>
-				<table border=1 style="border-collapse:collapse">
-	    <tr>
+				<table>
+				    <tr>
+				    <th>Nombre y Apellido</th>
+				    <th>Password</th>
 				      <th>Num Doc</th>
-				      <th>Nombre y Apellido</th>
-				      <th>Contraseña</th>
 				      <th>Fecha</th>
-				      <th>Edad</th>
-				     <!-- <th>otraFecha</th>-->
+				      <th>otraFecha</th>
 				      <th>Tipo</th>
-				      <th>Cod</th>
-				      <th>Telefono</th>		      
-				      <th>Email</th>	
-				      <th>Cod - Telefono</th>	
-				      <th>fechaUlt</th>
-				      <th>Tiempo Transcurrido</th>
-				      <th>Datos adicionales </th>
-				      
-				      
-				      		      
+				      <th>Telefono</th>
+				      <th>Email</th>				      
+				      <th>Fecha Ultima Compra</th>
+				      <th>Edad</th>
+				      <th>Tiempo desde la ultima compra</th>
 				    </tr>
 					<tr th:each="cli : ${clientes}">
+						<td th:text="${cli.nombreApellido}"></td>
+						<td th:text="${cli.password}"></td>
 						<td th:text="${cli.nroDocumento}"></td>
-						<td th:text="${cli.nYa}"></td>
-						<td th:text="${cli.Password}"></td>
-						  <!--<td th:text="${cli.fechaNacimiento}"></td>-->
+						<td th:text="${cli.fechaNacimiento}"></td>
 						<td th:text="${#temporals.format(cli.fechaNacimiento,'dd/MM/yyyy')}"></td>
-						<td th:text="${cli.edad}"></td>
 						<td th:text="${cli.tipoDocumento}"></td>
-						<td th:text="${cli.codigoAreaTelefono}"></td>
-						<td th:text="${cli.numTelefono}"></td>
-						<td th:text="${cli.email}"></td>
-						<td th:text="${cli.codigoAreaTelefono}+' - ' +${cli.numTelefono}"></td>
+						<td th:text="${cli.codigoAreaTelefono}+' - '+${cli.numTelefono}"></td>
+						<td th:text="${cli.email}"></td>						
 						<td th:text="${#temporals.format(cli.fechaUltimaCompra,'dd/MM/yyyy')}"></td>
-						<td th:text="${cli.tiempoUltCompra}"></td>
-						<td th:text="${cli.datosAdicionales}"></td>
-												
+						<td th:text="${cli.getEdad()}"></td>
+						<td th:text="${cli.getTiempoDesdeUltimaCompra()}"></td>
 					</tr>
 				</table>
 			</div>

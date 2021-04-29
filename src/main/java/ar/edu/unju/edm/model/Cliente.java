@@ -1,101 +1,20 @@
 package ar.edu.unju.edm.model;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Cliente {
-	private int nroDocumento;
-	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate fechaNacimiento;
-	
-	//Calendar
-	//private Date fechaUltimCompra = new Date();
-	
-	private String tipoDocumento;
-	private int codigoAreaTelefono;
-	private int numTelefono;
-	private String email;
-	
-	
-	
-	private String password;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate fechaUltimaCompra;
-	private String nYa;
-	private int edad;
-	private String datosAdicionales;
-	private String tiempoUltCompra;
-
-
-	
-	
-	
-	
-	
-	
-	
-	public String getTiempoUltCompra() {
-		return tiempoUltCompra;
-	}
-
-	public void setTiempoUltCompra(String tiempoUltCompra) {
-		this.tiempoUltCompra = tiempoUltCompra;
-	}
-
-	public String getDatosAdicionales() {
-		return datosAdicionales;
-	}
-
-	public void setDatosAdicionales(String datosAdicionales) {
-		this.datosAdicionales = datosAdicionales;
-	}
-
-	public int getEdad() {
-		return edad;
-	}
-
-	public void setEdad(int edad) {
-		this.edad = edad;
-	}
-
-	public String getnYa() {
-		return nYa;
-	}
-
-	public void setnYa(String nYa) {
-		this.nYa = nYa;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public LocalDate getFechaUltimaCompra() {
-		return fechaUltimaCompra;
-	}
-
-	public void setFechaUltimaCompra(LocalDate fechaUltimaCompra) {
-		this.fechaUltimaCompra = fechaUltimaCompra;
-	}
+	@DateTimeFormat(pattern = "yyyy-MM-dd") 
+private LocalDate fechaNacimiento, fechaUltimaCompra;
+	private int nroDocumento, codigoAreaTelefono, numTelefono;
+	private String tipoDocumento, email, nombreApellido, password;
 
 	public Cliente() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public int getNroDocumento() {
-		return nroDocumento;
-	}
-
-	public void setNroDocumento(int nroDocumento) {
-		this.nroDocumento = nroDocumento;
 	}
 
 	public LocalDate getFechaNacimiento() {
@@ -106,12 +25,20 @@ public class Cliente {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public String getTipoDocumento() {
-		return tipoDocumento;
+	public LocalDate getFechaUltimaCompra() {
+		return fechaUltimaCompra;
 	}
 
-	public void setTipoDocumento(String tipoDocumento) {
-		this.tipoDocumento = tipoDocumento;
+	public void setFechaUltimaCompra(LocalDate fechaUltimaCompra) {
+		this.fechaUltimaCompra = fechaUltimaCompra;
+	}
+
+	public int getNroDocumento() {
+		return nroDocumento;
+	}
+
+	public void setNroDocumento(int nroDocumento) {
+		this.nroDocumento = nroDocumento;
 	}
 
 	public int getCodigoAreaTelefono() {
@@ -130,6 +57,14 @@ public class Cliente {
 		this.numTelefono = numTelefono;
 	}
 
+	public String getTipoDocumento() {
+		return tipoDocumento;
+	}
+
+	public void setTipoDocumento(String tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -138,8 +73,34 @@ public class Cliente {
 		this.email = email;
 	}
 
+	public String getPassword() {
+		return password;
+	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getNombreApellido() {
+		return nombreApellido;
+	}
+
+	public void setNombreApellido(String nombreApellido) {
+		this.nombreApellido = nombreApellido;
+	}
+	public int getEdad() {		
+		int edad = 0;
+		LocalDate hoy = LocalDate.now();
+		Period periodo = Period.between(fechaNacimiento, hoy);
+		edad = periodo.getYears();		
+		return edad;
+	}
 	
-	
+	public String getTiempoDesdeUltimaCompra() {
+		LocalDate fechaActual = LocalDate.now();
+		Period periodo = Period.between(fechaUltimaCompra, fechaActual);
+		return "Años: "+periodo.getYears() + " Mes: " + periodo.getMonths() + " Dia: " + periodo.getDays() ;		
+		 	
+	}
 
 }
