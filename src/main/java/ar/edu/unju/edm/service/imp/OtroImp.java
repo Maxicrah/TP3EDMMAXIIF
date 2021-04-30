@@ -10,7 +10,7 @@ public class OtroImp implements IClienteService{
 	@Override
 	public void guardarCliente(Cliente unCliente) {
 		// TODO Auto-generated method stub
-		//aqui podriamos guardar los datos en una base de datos....
+
 	}
 
 	@Override

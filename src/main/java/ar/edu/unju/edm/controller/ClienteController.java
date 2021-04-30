@@ -23,10 +23,10 @@ private static final Log LOGGER = LogFactory.getLog(ClienteController.class);
 //@Qualifier
 IClienteService clienteService;
 
-//se pueden inyectar varios service con qualifier para usar los mismos metodos para distintas cosas
+
 //@Autowired
 //@Qualifier("OtroImp")
-//IClienteService otroclienteService;
+
 
 @GetMapping("/cliente/mostrar")
 public String cargarCliente(Model model) {
